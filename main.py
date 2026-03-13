@@ -1,3 +1,5 @@
+import random
+
 def initialize_game():#initializes the board and game state
     board = [[" ", " ", " "],
              [" ", " ", " "],
@@ -24,11 +26,11 @@ def make_move(board, row, col, current_player):
     return False 
 
 def make_AI_move(board):
-    for row in range(3):
-        for col in range(3):
-            if board[row][col] == " ":
-                board[row][col] = "O"
-                return True 
+    available_cells = [(row, col) for row in range(3) for col in range(3) if board[row][col] == " "]
+    if available_cells:
+        row, col = random.choice(available_cells)
+        board[row][col] = "O"
+        return True 
     return False 
 
 def check_winner(board):
