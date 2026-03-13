@@ -23,6 +23,13 @@ def make_move(board, row, col, current_player):
         return True 
     return False 
 
+def make_AI_move(board):
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] == " ":
+                board[row][col] = "O"
+                return True 
+    return False 
 
 def check_winner(board):
     for row in board:
@@ -91,7 +98,16 @@ def play_game():
             game_over = True
 
         else:
-            current_player = switch_player(current_player)
+            if current_player == "X":
+                current_player = switch_player(current_player)
+                make_AI_move(board)
+                display_board(board)
+                winner = check_winner(board)
+                if winner:
+                    print(f"Player {winner} wins!")
+                    game_over = True
+                current_player = switch_player(current_player)
+
 
 
 # Run the game
